@@ -2,6 +2,7 @@
 
 #pragma once
 #include <iostream>
+#include <tuple>
 #include <vector>
 #include "pipestream.hpp"
 
@@ -51,6 +52,8 @@ class Cpplot {
       void plot (std::vector<std::pair<Tx,Ty>> vpair);
 
     template <typename T> void splot (std::vector<std::vector<T>> v);
+    template <typename Tx, typename Ty, typename Tz>
+      void splot (std::vector<std::tuple<Tx,Ty,Tz>> v);
 };
 
 void Cpplot::init () {
@@ -136,6 +139,18 @@ void Cpplot::splot (std::vector<std::vector<T>> v) {
     for (int j=0; j<v[i].size(); ++j) {
       pipe_ << i << ", " << j << ", " << v[i][j] << "\n";
     }
+  }
+  pipe_ << "e\n";
+  pipe_.flush();
+}
+
+template <typename Tx, typename Ty, typename Tz>
+void Cpplot::splot (std::vector<std::tuple<Tx,Ty,Tz>> v) {
+  pipe_ << "splot '-' with points\n";
+  for (int i=0; i<v.size(); ++i) {
+    pipe_ << std::get<0>(v[i]) << ", ";
+    pipe_ << std::get<1>(v[i]) << ", ";
+    pipe_ << std::get<2>(v[i]) << "\n";
   }
   pipe_ << "e\n";
   pipe_.flush();
