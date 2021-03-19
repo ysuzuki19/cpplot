@@ -10,7 +10,13 @@ class Cpplot {
     pipestream pipe_;
 
   public:
-    Cpplot () : pipe_("gnuplot -persist") {
+    Cpplot () {
+      pipe_.open("gnuplot");
+      init();
+    }
+    Cpplot (std::string option) {
+      std::string pname = "gnuplot " + option;
+      pipe_.open(pname.c_str());
       init();
     }
     ~Cpplot () {
@@ -43,6 +49,8 @@ class Cpplot {
     template <typename T> void plot (std::vector<T> v);
     template <typename Tx, typename Ty>
       void plot (std::vector<std::pair<Tx,Ty>> vpair);
+
+    template <typename T> void splot (std::vector<std::vector<T>> v);
 };
 
 void Cpplot::init () {
@@ -116,6 +124,18 @@ void Cpplot::plot (std::vector<std::pair<Tx,Ty>> vpair) {
   pipe_ << "plot '-' with points\n";
   for (const auto& e: vpair) {
     pipe_ << e.first << ", " << e.second << "\n";
+  }
+  pipe_ << "e\n";
+  pipe_.flush();
+}
+
+template <typename T>
+void Cpplot::splot (std::vector<std::vector<T>> v) {
+  pipe_ << "splot '-' with points\n";
+  for (int i=0; i<v.size(); ++i) {
+    for (int j=0; j<v[i].size(); ++j) {
+      pipe_ << i << ", " << j << ", " << v[i][j] << "\n";
+    }
   }
   pipe_ << "e\n";
   pipe_.flush();
