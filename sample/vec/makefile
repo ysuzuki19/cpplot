@@ -1,5 +1,5 @@
 SOURCE = main.cpp
-INCLUDE = ../include
+INCLUDE = ../../include
 TARGET = project
 MAKEFILE = makefile
 CXX = g++
