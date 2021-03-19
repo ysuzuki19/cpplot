@@ -25,17 +25,24 @@ class Cpplot {
     void setZLabel (const char* label);
     void setZLabel (std::string label);
 
-    void setLabels (const char* const& xlabel, const char* const& ylabel);
-    void setLabels (std::string const& xlabel, std::string const& ylabel);
-    void setLabels (const char* const& xlabel, const char* const& ylabel, const char* const& zlabel);
-    void setLabels (std::string const& xlabel, std::string const& ylabel, std::string const& zlabel);
+    void setLabels (const char* const& xlabel,
+                    const char* const& ylabel);
+    void setLabels (std::string const& xlabel,
+                    std::string const& ylabel);
+    void setLabels (const char* const& xlabel,
+                    const char* const& ylabel,
+                    const char* const& zlabel);
+    void setLabels (std::string const& xlabel,
+                    std::string const& ylabel,
+                    std::string const& zlabel);
 
     template <typename T> void setXRange (T start, T finish);
     template <typename T> void setYRange (T start, T finish);
     template <typename T> void setZRange (T start, T finish);
 
     template <typename T> void plot (std::vector<T> v);
-    template <typename T> void plot (std::vector<std::pair<T,T>> vpair);
+    template <typename Tx, typename Ty>
+      void plot (std::vector<std::pair<Tx,Ty>> vpair);
 };
 
 void Cpplot::init () {
@@ -104,8 +111,8 @@ void Cpplot::plot (std::vector<T> v) {
   pipe_.flush();
 }
 
-template <typename T>
-void Cpplot::plot (std::vector<std::pair<T,T>> vpair) {
+template <typename Tx, typename Ty>
+void Cpplot::plot (std::vector<std::pair<Tx,Ty>> vpair) {
   pipe_ << "plot '-' with points\n";
   for (const auto& e: vpair) {
     pipe_ << e.first << ", " << e.second << "\n";

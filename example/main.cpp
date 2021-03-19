@@ -2,7 +2,6 @@
 #include <vector>
 
 #include "../include/cpplot.hpp"
-//#include "pstream.hpp"
 using namespace std;
 
 int main() {
@@ -16,10 +15,17 @@ int main() {
   }
   cplt.plot(v);
 
-  vector<pair<int,int>> vpair (100);
+  vector<pair<int,int>> vii (100);
   for (int i=0; i<v.size(); ++i) {
-    vpair[i].first = i;
-    vpair[i].second = v.size() - i;
+    vii[i].first = i;
+    vii[i].second = v.size() - i;
   }
-  cplt.plot(vpair);
+  cplt.plot(vii);
+
+  vector<pair<int,float>> vif (100);
+  for (int i=0; i<v.size(); ++i) {
+    vif[i].first = i;
+    vif[i].second = v.size() - i;
+  }
+  cplt.plot(vif);
 }
