@@ -52,6 +52,14 @@ $ make
 $ ./project
 ```
 
+1. 2d graph animation
+
+```bash
+$ cd cpplot/sample/animation
+$ make
+$ ./project
+```
+
 ## APIs
 ### constructor
 
