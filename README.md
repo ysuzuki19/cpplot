@@ -1,5 +1,5 @@
 # cpplot
-C++ gnuplot interface
+C++ header-only gnuplot interface
 
 # INSTALL gnuplot
 
