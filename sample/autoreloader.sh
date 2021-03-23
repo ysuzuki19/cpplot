@@ -2,7 +2,8 @@
 
 while :;
 do
-  make
-  make run
+  if make; then
+    make run
+  fi
   res=$(fswatch -1 --event Updated .)
 done
