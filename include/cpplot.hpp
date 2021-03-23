@@ -9,6 +9,7 @@
 class Cpplot {
   private:
     pipestream pipe_;
+    std::string plot_type_ = "points";
 
   public:
     Cpplot () {
@@ -46,6 +47,10 @@ class Cpplot {
     template <typename T> void setXRange (T start, T finish);
     template <typename T> void setYRange (T start, T finish);
     template <typename T> void setZRange (T start, T finish);
+
+    void setStyle(std::string const& style) {
+      plot_type_ = style;
+    }
 
     template <typename T> void plot (std::vector<T> v);
     template <typename Tx, typename Ty>
@@ -114,7 +119,7 @@ void Cpplot::setZRange (T start, T finish) {
 
 template <typename T>
 void Cpplot::plot (std::vector<T> v) {
-  pipe_ << "plot '-' with points\n";
+  pipe_ << "plot '-' with " + plot_type_ + "\n";
   for (int i=0; i<v.size(); ++i) {
     pipe_ << i << ", " << v[i] << "\n";
   }
