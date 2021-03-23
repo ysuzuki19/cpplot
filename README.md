@@ -28,7 +28,7 @@ $ make
 $ ./project
 ```
 
-1. 2D graph with `vector<pair<Tx,Ty>>`
+2. 2D graph with `vector<pair<Tx,Ty>>`
 
 ```bash
 $ cd cpplot/sample/vec_pair
@@ -36,7 +36,7 @@ $ make
 $ ./project
 ```
 
-1. 3d graph with `vector<vector<T>>`
+3. 3d graph with `vector<vector<T>>`
 
 ```bash
 $ cd cpplot/sample/vec_vec
@@ -44,7 +44,7 @@ $ make
 $ ./project
 ```
 
-1. 3d graph with `vector<tuple<Tx,Ty,Tz>>`
+4. 3d graph with `vector<tuple<Tx,Ty,Tz>>`
 
 ```bash
 $ cd cpplot/sample/vec_tuple
@@ -52,7 +52,7 @@ $ make
 $ ./project
 ```
 
-1. 2d graph animation
+5. 2d graph animation
 
 ```bash
 $ cd cpplot/sample/animation
