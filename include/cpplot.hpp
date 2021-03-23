@@ -129,7 +129,7 @@ void Cpplot::plot (std::vector<T> v) {
 
 template <typename Tx, typename Ty>
 void Cpplot::plot (std::vector<std::pair<Tx,Ty>> vpair) {
-  pipe_ << "plot '-' with points\n";
+  pipe_ << "plot '-' with " + plot_type_ + "\n";
   for (const auto& e: vpair) {
     pipe_ << e.first << ", " << e.second << "\n";
   }
@@ -139,7 +139,7 @@ void Cpplot::plot (std::vector<std::pair<Tx,Ty>> vpair) {
 
 template <typename T>
 void Cpplot::splot (std::vector<std::vector<T>> v) {
-  pipe_ << "splot '-' with points\n";
+  pipe_ << "splot '-' with " + plot_type_ + "\n";
   for (int i=0; i<v.size(); ++i) {
     for (int j=0; j<v[i].size(); ++j) {
       pipe_ << i << ", " << j << ", " << v[i][j] << "\n";
@@ -151,7 +151,7 @@ void Cpplot::splot (std::vector<std::vector<T>> v) {
 
 template <typename Tx, typename Ty, typename Tz>
 void Cpplot::splot (std::vector<std::tuple<Tx,Ty,Tz>> v) {
-  pipe_ << "splot '-' with points\n";
+  pipe_ << "splot '-' with " + plot_type_ + "\n";
   for (int i=0; i<v.size(); ++i) {
     pipe_ << std::get<0>(v[i]) << ", ";
     pipe_ << std::get<1>(v[i]) << ", ";
